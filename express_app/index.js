@@ -4,6 +4,8 @@ const express = require('express');
 const axios = require('axios');
 //import dotenv
 const dotenv = require('dotenv');
+// cors
+const cors = require('cors');
 //path
 const path = require('path');
 //port
@@ -36,7 +38,18 @@ app.get("^/$|/BNRY-test", (req, res) => {
     res.status(200).sendFile(path.join(__dirname,'./view/index.html'));
   })
 
-
+  app.use((req, res, next)=> {
+    res.header('Access-Control-Allow-Origin', 'http://localhost:8080')
+    res.header("Access-Control-Allow-Credentials", "true")
+    res.header("Access-Control-Allow-Methods", "*")
+    res.header("Access-Control-Allow-Headers", "*")
+    next();
+});
+    app.use(
+    cors(), 
+    express.json,
+    express.urlencoded({extended: false})
+)
 
 
 
