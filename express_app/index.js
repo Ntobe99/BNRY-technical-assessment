@@ -6,6 +6,8 @@ const axios = require('axios');
 const dotenv = require('dotenv');
 // cors
 const cors = require('cors');
+//cookie-parser
+const cookieParser = require('cookie-parser');
 //path
 const path = require('path');
 //port
@@ -47,6 +49,7 @@ app.get("^/$|/BNRY-test", (req, res) => {
 });
     app.use(
     cors(), 
+    cookieParser(),
     express.json,
     express.urlencoded({extended: false})
 )
