@@ -23,8 +23,8 @@
       <img
         v-bind:src="item.urlToImage"
         class="card-img-top"
-        style="border-radius: 0px;height:15rem
-        ;" 
+        style="border-radius: 0px;height:15rem 
+        ; padding-top: 1rem;" 
       />
       <div class="card-body">
 

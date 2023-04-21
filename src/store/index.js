@@ -36,14 +36,13 @@ export default createStore({
       const res = await axios.get(`${newsUrl}/news/search/${query}`);
       const { result, err } = await res.data;
       if (result) {
-        context.commit("setQuery", result);
+        context.commit("setNews", result);
         console.log(result)
       } else {
         context.commit("setMessage", err);
         console.log(err)
       }
     },
-
   },
   modules: {
   }
