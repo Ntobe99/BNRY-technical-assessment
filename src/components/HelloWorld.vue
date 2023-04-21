@@ -1,59 +1,130 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-router" target="_blank" rel="noopener">router</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-vuex" target="_blank" rel="noopener">vuex</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+  <div class="home">
+    <div class="row justify-content-center " v-if="spinner">
+    <SpinnerComp />
+    </div>
+    <div class="news red full-width">
+	<span>Breaking News</span>
+	<ul class="scrollLeft">
+    <li><a href="#">Headlines</a></li>
+    <li><a href="#">Latest</a></li>
+    <li><a href="#">Hotest</a></li>
+    <li><a href="#">Freshest</a></li>
+	</ul>
+</div>
+  
+  <div class="row gap-2">
+    <div
+      class="card border-danger"
+      style="width:30rem; height: 22rem"
+      v-for="item in news"
+      :key="item"
+    >
+      <img
+        v-bind:src="item.urlToImage"
+        class="card-img-top"
+        style="border-radius: 0px;height:15rem
+        ;" 
+      />
+      <div class="card-body">
+
+        <h5 class="card-title fw-bold">{{item.title }}</h5>
+        <!-- <p class="card-text">{{item . }}</p> -->
+      </div>
+    </div>
   </div>
+</div>
+
 </template>
 
 <script>
+import SpinnerComp from "@/components/SpinnerComp.vue";
+import { computed } from "@vue/runtime-core";
+import { useStore } from "vuex";
+
 export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  }
-}
+components: { SpinnerComp},
+setup() {
+  const store = useStore();
+  store.dispatch("fetchNews");
+  const news = computed(() => store.state.news); 
+  const spinner = computed(() => store.state.Spinner);
+  console.log(news)
+
+  return {
+    news,
+    spinner,
+  };
+},
+};
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+.home{
+  padding-top: 4rem;
+  padding-left: 2rem;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+.card{
+  border-radius: 0px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
+.card:hover{
+  background-color: rgb(241, 237, 237);
 }
-a {
-  color: #42b983;
+.news {
+  box-shadow: inset 0 -15px 30px rgba(0,0,0,0.4), 0 5px 10px rgba(0,0,0,0.5);
+  width: 350px;
+  height: 30px;
+  margin: 20px auto;
+  overflow: hidden;
+  border-radius: 4px;
+  padding: 2px;
+ 
+} 
+.full-width{
+    width: 100%;
 }
+.news span {
+  float: left;
+  color: #fff;
+  padding: 6px;
+  position: relative;
+  top: 1%;
+  border-radius: 4px;
+  box-shadow: inset 0 -15px 30px rgba(0,0,0,0.4);
+  font: 16px 'Source Sans Pro', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+ 
+  cursor: pointer
+}
+
+.news ul {
+  float: left;
+  padding-left: 20px;
+  animation: ticker 10s cubic-bezier(1, 0, .5, 0) infinite;
+ 
+}
+
+.news ul li {line-height: 30px; list-style: none }
+
+.news ul li a {
+  color: #fff;
+  text-decoration: none;
+  font: 14px Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -webkit-user-select: none
+}
+@keyframes ticker {
+	0%   {margin-top: 0}
+	25%  {margin-top: -30px}
+	50%  {margin-top: -60px}
+	75%  {margin-top: -90px}
+	100% {margin-top: 0}
+}
+.news ul:hover { animation-play-state: paused }
+.news span:hover+ul{animation-play-state: paused;}
+.red{
+  background: #d23435;
+  padding:2px;
+  padding-right: 2rem;}
 </style>
