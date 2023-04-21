@@ -11,10 +11,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center">
         <li class="nav-item ">
-        <RouterLink to="/">Headlines</RouterLink>
+        <RouterLink to="/">HEADLINES</RouterLink>
         </li>
         <li class="nav-item ">
-         <RouterLink to="/about">Articles</RouterLink>
+         <RouterLink to="/about">ARTICLES</RouterLink>
         </li>
         
       </ul>

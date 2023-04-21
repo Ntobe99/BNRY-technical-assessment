@@ -16,7 +16,7 @@
   <div class="row gap-2">
     <div
       class="card border-danger"
-      style="width:30rem; height: 22rem"
+      style="width:30rem; height: 24rem"
       v-for="item in news"
       :key="item"
     >
@@ -29,7 +29,7 @@
       <div class="card-body">
 
         <h5 class="card-title fw-bold">{{item.title }}</h5>
-        <!-- <p class="card-text">{{item . }}</p> -->
+       <button class="btn btn-outline-danger"><a class="link" :href="item.url" target="_blank">See More</a> </button>
       </div>
     </div>
   </div>
@@ -60,9 +60,17 @@ setup() {
 </script>
 
 <style scoped>
+.btn{
+  border-radius: 0px;
+}
 .home{
   padding-top: 4rem;
-  padding-left: 2rem;
+  padding-left: 3rem;
+  padding-right: 2rem;
+}
+.link{
+  text-decoration: none;
+  color: black;
 }
 .card{
   border-radius: 0px;

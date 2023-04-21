@@ -33,7 +33,7 @@ export default createStore({
       }
     },
     async searchQuery(context, query) {
-      const res = await axios.get(`${newsUrl}/news/search/${query}`, query);
+      const res = await axios.get(`${newsUrl}/news/search/${query}`);
       const { result, err } = await res.data;
       if (result) {
         context.commit("setQuery", result);
