@@ -12,8 +12,8 @@
         <div v-for="item in articles" :key="item.title">
             <div class="container text-center">
   <div class="row">
-    <div class="col">
-    <img :src="item.urlToImage" alt="" style="height: 25rem;width: 30rem;">
+    <div class="col ">
+    <img :src="item.urlToImage" alt="" class="img-fluid" style="height: 25rem;width: 30rem;">
     </div>
     <div class="col">
      <h1 class="text-start">{{ item.title }}</h1>
