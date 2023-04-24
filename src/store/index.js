@@ -4,8 +4,10 @@ const  newsUrl= 'https://news-608t.onrender.com/'
 export default createStore({
   state: {
     news:null,
-    query:null,
-    spinner:null
+    spinner:null,
+    articles:[],
+    loading: false,
+    error: ''
   },
   getters: {
   },
@@ -18,8 +20,18 @@ export default createStore({
     },
     setSpinner(state,values){
       state.query=values;
+    },
+    SET_ARTICLES(state, articles) {
+      state.articles = articles;
+    },
+    SET_LOADING(state, loading) {
+      state.loading = loading;
+    },
+    SET_ERROR(state, error) {
+      state.error = error;
     }
   },
+
   actions: {
     fetchNews: async (context) => {
       const response = await axios.get(`${newsUrl}news/headlines`);
@@ -32,15 +44,18 @@ export default createStore({
         context.commit("setSpinner", true);
       }
     },
-    async searchQuery(context, query) {
-      const res = await axios.get(`${newsUrl}/news/search/${query}`);
-      const { result, err } = await res.data;
-      if (result) {
-        context.commit("setNews", result);
-        console.log(result)
-      } else {
-        context.commit("setMessage", err);
-        console.log(err)
+    async searchArticles(context, query) {
+      context.commit('SET_LOADING', true);
+      try {
+        const response = await axios.get(`${newsUrl}news/search/${query}`);
+        console.log(response)
+        const articles = response.data
+        context.commit('SET_ARTICLES', articles);
+      } catch (error) {
+        console.error(error);
+        context.commit('SET_ERROR', 'Server Error');
+      } finally {
+        context.commit('SET_LOADING', false);
       }
     },
   },
