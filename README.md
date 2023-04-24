@@ -1,6 +1,6 @@
 # BNRY-technical-assessment
 > A live news web Application where you can search for articles in any language or in any country  .
-> Live demo [https://bnrytest-1606e.web.app/].
+> Live demo [https://bnrytest-1606e.firebaseapp.com/].
 > render link [https://news-608t.onrender.com/]
 
 ## Table of Contents
