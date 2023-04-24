@@ -5,15 +5,15 @@
         <input type="text" class="search-input" placeholder="search ..." v-model="searchTerm" />
         <button type="submit" class="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
       </form>
-      <p v-if="loading"> <SpinnerComp/> </p>
-      <p v-if="error">{{ error }}</p>
-      <div v-if="articles.length">
-        <div class="row">
-        <div v-for="item in articles" :key="item.title">
-            <div class="container text-center">
+      <p v-if="loading"><SpinnerComp/></p>
+ <p v-if="error">{{ error }}</p>
+ <div v-if="articles.length">
+ <div class="row">
+ <div  v-for="item in articles" :key="item.title" >
+ <div class="container text-center">
   <div class="row">
     <div class="col ">
-    <img :src="item.urlToImage" alt="" class="img-fluid" style="height: 25rem;width: 30rem;">
+    <img :src="item.urlToImage" alt=""  style="height: 25rem;width: 30rem;">
     </div>
     <div class="col">
      <h1 class="text-start">{{ item.title }}</h1>
@@ -25,11 +25,11 @@
     </div>
     </div>
     <hr class="border border-danger border-2 opacity-50">
-   
     </div>
       </div>
     </div>
     </div>
+    <div v-else>NO RESULTS FOUND</div>
     </div>
   </template>
   
@@ -54,7 +54,7 @@ import store from '@/store';
         }),
     },
     methods: {
-        // ...mapActions(["searchArticles"]),
+      
         search() {
          store.dispatch('searchArticles', this.searchTerm)   
         }
@@ -102,5 +102,22 @@ background: none;
 font-size: 20px;
 border-left: 4px solid #83411a;
 }
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* styles for mobile */
+@media (max-width: 767px) {
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  .row{
+    display: column;
+  }
+}
+
+
 </style>
   
