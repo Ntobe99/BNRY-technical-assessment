@@ -13,7 +13,7 @@
  <div class="container text-center">
   <div class="row">
     <div class="col ">
-    <img :src="item.urlToImage" alt=""  style="height: 25rem;width: 30rem;">
+    <img :src="item.urlToImage" alt=""  style="height: fit-content">
     </div>
     <div class="col">
      <h1 class="text-start">{{ item.title }}</h1>

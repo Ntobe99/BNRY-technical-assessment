@@ -29,7 +29,7 @@
       <div class="card-body">
 
         <h5 class="card-title fw-bold">{{item.title }}</h5>
-       <button class="btn btn-outline-danger"><a class="link" :href="item.url" target="_blank">See More</a> </button>
+       <button class="btn btn-outline-danger"><a class="link" :href="item.url" target="_blank">See More</a></button>
       </div>
     </div>
   </div>
