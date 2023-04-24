@@ -24,8 +24,8 @@ List the ready features here:
 
 ## Setup
 npm i 
-installations
-body-parser,dotenv,axios
+##installations
+body-parser,dotenv,axios,cors,express
 
 ## Project Status
 Project is: in progress
